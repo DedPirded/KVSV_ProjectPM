@@ -10,16 +10,9 @@ namespace ConsoleVersionOfKVSV
             dateNow = DateTime.Today;
             DateTime daysNextKvartal = new DateTime();
             int[] dates = YearsMonthDays(dateNow);
-            //Console.WriteLine("Hell to World!");
             int kvartal = Kvartal(dates);
-            bool repeat = true;
-            /*for (int i = 0; i < dates.Length; i++)
-            {
-                Console.WriteLine(dates[i]);
-            }*/
-            int dayOfNextKvartal = DaysToKvartal(kvartal, dates, dateNow, ref daysNextKvartal);
-            //Console.WriteLine(dayOfNextKvartal);
-            //Console.WriteLine(daysNextKvartal.ToShortDateString());
+            bool repeat = true;           
+            int dayOfNextKvartal = DaysToKvartal(kvartal, dates, dateNow, ref daysNextKvartal);          
             Console.WriteLine("Выберите: ФЛП(1), ООО(2 - пока не реализована).");
             char sym = Convert.ToChar(Console.ReadLine());
             switch (sym)
@@ -210,12 +203,12 @@ namespace ConsoleVersionOfKVSV
             DateTime dateOfNearMonth = new DateTime(dates[2], dates[1] + 1, 1);
             return dateOfNearMonth;
         }      
-        static TimeSpan DaysToNearMonth(DateTime dateNow, DateTime dateOfNearMonth)   //Не работает
+        static TimeSpan DaysToNearMonth(DateTime dateNow, DateTime dateOfNearMonth)   
         {
             TimeSpan f = dateOfNearMonth.Subtract(dateNow);           
             return f;
         }
-        static void FLPWithOutRonNO(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, ref bool repeat)
+        static void FLPWithOutRonNO(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, ref bool repeat) //ФЛП без наёмных рабочих на общей системе налогооблажения
         {
             Console.WriteLine("Вы платите один налог: 'Уплата ЕСВ'. Так же вы сдаёте один отчет: 'Отчёт по ЕСВ'");
             Console.WriteLine("Если вы хотите узнать больше информации о 'Уплата ЕСВ', нажмите цифру: 1");
@@ -250,7 +243,7 @@ namespace ConsoleVersionOfKVSV
             else
                 repeat = false;
         }
-        static void FLPWithOutRonEN3(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, ref bool repeat)
+        static void FLPWithOutRonEN3(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, ref bool repeat) //ФЛП без наёмных рабочих на Едином налоге(3 группа)
         {
             Console.WriteLine("Вы платите два налога: 'Улата ЕСВ' и 'Уплата ЕН'.\nТак же вы сдаёте два документа: 'Отчет по ЕСВ' и 'Налоговая декларация'.");
             Console.WriteLine("Если вы хотите узнать больше информации о 'Уплата ЕСВ', нажмите цифру: 1");
@@ -299,7 +292,7 @@ namespace ConsoleVersionOfKVSV
             else
                 repeat = false;
         }
-        static void FLPWithOutRonEN2(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, int nomerGrupi, DateTime dateNow, ref bool repeat)
+        static void FLPWithOutRonEN2(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, int nomerGrupi, DateTime dateNow, ref bool repeat) //ФЛП с наёмными рабочими на Едином налоге(1 группа), ФЛП без наёмных рабочих на Едином налоге(1 группа), ФЛП без наёмных рабочих на Едином налоге(2 группа)
         {
             Console.WriteLine("Вы платите два налога: 'Улата ЕСВ' и 'Уплата ЕН'.\nТак же вы сдаёте два документа: 'Отчет по ЕСВ' и 'Налоговая декларация'.");
             Console.WriteLine("Если вы хотите узнать больше информации о 'Уплата ЕСВ', нажмите цифру: 1");
@@ -362,7 +355,7 @@ namespace ConsoleVersionOfKVSV
             else
                 repeat = false;
         }
-        static void FLPWithRonNO(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, int kvartal, DateTime dateNow, ref bool repeat)
+        static void FLPWithRonNO(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, int kvartal, DateTime dateNow, ref bool repeat) //ФЛП с наёмными рабочими на общей системе НО
         {
             Console.WriteLine("Вы платите один налог: 'Уплата ЕСВ'.\nТак же вы сдаёте три отчета: 'Отчёт по ЕСВ', 'Налоговый расчет' и \n'Отчет о суммах начисленной заработной платы и суммах начисленного ЕСВ'");
             Console.WriteLine("Если вы хотите узнать больше информации о 'Уплата ЕСВ', нажмите цифру: 1");
@@ -408,7 +401,7 @@ namespace ConsoleVersionOfKVSV
             else
                 repeat = false;
         }
-        static void FLPWithRonEN2(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, DateTime dateNow, ref bool repeat)
+        static void FLPWithRonEN2(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, DateTime dateNow, ref bool repeat) //ФЛП с наёмными рабочими на Едином налоге(2 группа)
         {
             Console.WriteLine("Вы платите два налога: 'Уплата ЕСВ' и 'Уплата ЕН'.\nТак же вы сдаёте четыре отчета: 'Отчёт по ЕСВ', 'Налоговый расчет', \n'Отчет о суммах начисленной заработной платы и суммах начисленного ЕСВ' и \n'Налоговая декларация'");
             Console.WriteLine("Если вы хотите узнать больше информации о 'Уплата ЕСВ', нажмите цифру: 1");
@@ -469,7 +462,7 @@ namespace ConsoleVersionOfKVSV
                 repeat = false;
 
         }
-        static void FLPWithRonEN3(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, DateTime dateNow, ref bool repeat)
+        static void FLPWithRonEN3(int dayOfNextKvartal, DateTime daysNextKvartal, int[] dates, DateTime dateNow, ref bool repeat) //ФЛП с наёмными рабочими на Едином налоге(3 группа)
         {
             Console.WriteLine("Вы платите два налога: 'Уплата ЕСВ' и 'Уплата ЕН'.\nТак же вы сдаёте четыре отчета: 'Отчёт по ЕСВ', 'Налоговый расчет', \n'Отчет о суммах начисленной заработной платы и суммах начисленного ЕСВ' и \n'Налоговая декларация'");
             Console.WriteLine("Если вы хотите узнать больше информации о 'Уплата ЕСВ', нажмите цифру: 1");
